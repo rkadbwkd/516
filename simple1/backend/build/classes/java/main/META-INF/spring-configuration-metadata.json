@@ -1,0 +1,54 @@
+{
+  "groups": [
+    {
+      "name": "anyx",
+      "type": "com.anylogic.demo.config.AnyXProperties",
+      "sourceType": "com.anylogic.demo.config.AnyXProperties"
+    },
+    {
+      "name": "anyx.server-path",
+      "type": "com.anylogic.demo.config.AnyXProperties$ServerPath",
+      "sourceType": "com.anylogic.demo.config.AnyXProperties",
+      "sourceMethod": "getServerPath()"
+    },
+    {
+      "name": "spring.datasource",
+      "type": "javax.sql.DataSource",
+      "sourceType": "com.anylogic.demo.config.datasource.PostgresqlDatabaseConfig",
+      "sourceMethod": "postgreDataSource()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "anyx.server-path.any-x-file-path",
+      "type": "java.lang.String",
+      "sourceType": "com.anylogic.demo.config.AnyXProperties$ServerPath"
+    },
+    {
+      "name": "anyx.server-path.deploy-path",
+      "type": "java.lang.String",
+      "sourceType": "com.anylogic.demo.config.AnyXProperties$ServerPath"
+    },
+    {
+      "name": "anyx.server-path.dev-path",
+      "type": "java.lang.String",
+      "sourceType": "com.anylogic.demo.config.AnyXProperties$ServerPath"
+    },
+    {
+      "name": "anyx.server-path.editor-file-path",
+      "type": "java.lang.String",
+      "sourceType": "com.anylogic.demo.config.AnyXProperties$ServerPath"
+    },
+    {
+      "name": "anyx.server-path.servertype",
+      "type": "java.lang.Integer",
+      "sourceType": "com.anylogic.demo.config.AnyXProperties$ServerPath"
+    },
+    {
+      "name": "anyx.server-path.temp-excel-path",
+      "type": "java.lang.String",
+      "sourceType": "com.anylogic.demo.config.AnyXProperties$ServerPath"
+    }
+  ],
+  "hints": []
+}

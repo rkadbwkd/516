@@ -1,0 +1,25 @@
+spring:
+  application: demo
+  profiles:
+    active: dev
+    default: dev # 기본 환경을 dev로
+  devtools:
+    livereload:
+      enabled: true
+
+datasource:
+  type: com.zaxxer.hikari.HikariDataSource
+  #driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+  #username:
+  #password:
+  #url: jdbc:log4jdbc:postgresql://${postgres-server}:5432/${database-name}?currentSchema=${scheme-name}
+  driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+
+mybatis:
+  config-location: classpath:config/mybatis-config.xml
+  mapper-locations: classpath:mapper/**/*.xml
+
+server:
+  servlet:
+    register-default-servlet: true
+

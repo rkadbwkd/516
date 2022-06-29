@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.demo.common.mapper.CommonMapper">
+
+    <sql id="pagingHeader_mssqlSql">
+        SELECT *
+        FROM (
+            SELECT *
+            FROM (
+                SELECT (CASE
+                    WHEN (TOTAL_CNT%#{pagePerCnt} )  = 0 THEN TOTAL_CNT/#pageSize#
+                    ELSE TOTAL_CNT/#{pagePerCnt}  + 1
+                        END) MAX_VIEW_PAGE
+                            ,#pageSize# PAGE_SIZE
+                            ,#curPage# CUR_PAGE
+                            ,Y.*
+                FROM (
+                    SELECT (CASE
+                        WHEN (#pageSize# * (#curPage# - 1) + 1) &gt; TOTAL_CNT THEN 1
+                            ELSE (#pageSize# * (#curPage# - 1) + 1)
+                            END) START_NUM
+                        ,(CASE
+                         WHEN (#curPage# * #{pagePerCnt}) &gt; TOTAL_CNT THEN TOTAL_CNT
+                             ELSE (#curPage# * #pageSize#)
+                             END) END_NUM
+                        , X.*
+                    FROM (SELECT COUNT (*) OVER () TOTAL_CNT, Z.*
+                          FROM (
+    </sql>
+
+    <sql id="pagingFooter_mssqlSql">
+                               ) Z
+                           ) X
+                       ) Y
+                   )W
+               WHERE RNUM &lt;= END_NUM
+            )V
+        WHERE RNUM &gt;= START_NUM
+    </sql>
+
+
+    <!-- [paging] 페이징처리 Header  -->
+    <sql id="pagingHeaderSql">
+        SELECT V.*
+        FROM (
+            SELECT *
+            FROM (
+                SELECT (CASE
+                    WHEN ( MOD("totalCnt", cast(#{pagePerCnt} as int))) = 0 THEN "totalCnt"/cast(#{pagePerCnt} as int)
+                    ELSE "totalCnt"/cast(#{pagePerCnt} as int) + 1
+                        END)  as "maxViewPage"
+                    ,cast(#{pagePerCnt} as int) as "pagePerCnt"
+                    ,cast(#{pageNum} as int) as "pageNum"
+                    ,Y.*
+                FROM (
+                    SELECT (CASE
+                        WHEN (cast(#{pagePerCnt} as int) * (cast(#{pageNum} as int) - 1) + 1) &gt; "totalCnt" THEN 1
+                        ELSE (cast(#{pagePerCnt} as int) * (cast(#{pageNum} as int) - 1) + 1)
+                            END)  as "startNum"
+                        ,(CASE
+                        WHEN (cast(#{pageNum} as int) * cast(#{pagePerCnt} as int)) &gt; "totalCnt" THEN "totalCnt"
+                        ELSE (cast(#{pageNum} as int) * cast(#{pagePerCnt} as int))
+                            END) as "endNum"
+                        , X.*
+                    FROM (SELECT COUNT (*) OVER () "totalCnt", Z.*
+                          FROM (
+    </sql>
+
+
+    <!-- [paging] 페이징처리 Footer  -->
+    <sql id="pagingFooterSql">
+                                ) Z
+                            ) X
+                        ) Y
+                    )W
+                WHERE "RNUM" &lt;= "endNum"
+            )V
+        WHERE "RNUM" &gt;= "startNum"
+    </sql>
+
+</mapper>
+
+
+
+
+

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.demo.common.file.mapper.AttachFileEmkoDemoMapper">
+
+
+    <select  id="selectAttachFileByRecord" parameterType="Map" resultType="Map">
+        SELECT
+            attach_file_id "attach_file_id",
+            ref_id1 "ref_id1",
+            file_name "file_name",
+            file_path "file_path",
+            to_char(create_dt, 'yyyymmdd') as "create_dt",
+            file_origin_name "file_origin_name",
+            file_origin_name "name",
+            table_name "table_name",
+            comments "comments",
+            file_url "file_url"
+        FROM emko.demo.tb_attach_file
+        WHERE 1 = 1
+            and table_name = #{table_name}
+            <if test="ref_id_seq != null and ref_id_seq !='' and ref_id_seq"> 
+                and ref_id_seq = #{ref_id_seq}
+            </if>
+            <if test="ref_id1 != null and ref_id1 !='' and ref_id1"> 
+                and ref_id1 = #{ref_id1}
+            </if>
+            <if test="ref_id2 != null and ref_id2 !='' and ref_id2"> 
+                and ref_id2 = #{ref_id2}
+            </if>
+            <if test="ref_id3 != null and ref_id3 !='' and ref_id3"> 
+                and ref_id3 = #{ref_id3}
+            </if>
+
+        <if test="comments != null and comments != '' ">
+            AND comments = #{comments}
+        </if>
+    </select>
+    
+
+    <!--  첨부파일 - getAttachFile -->
+    <select id="getAttachFile" parameterType="Map" resultType="Map">
+        SELECT
+            attach_file_id
+            , ref_id_seq
+            , ref_id1
+            , ref_id2
+            , ref_id3
+            , file_name
+            , file_path
+            , to_char(create_dt,'YYYY-MM-DD hh24:mi:ss') as create_dt
+            , table_name
+            , ROW_NUMBER() OVER( order by attach_file_id ) as RNUM 
+        FROM emko.demo.tb_attach_file
+        WHERE 1 = 1
+        AND attach_file_id = #{attach_file_id}
+    </select>
+    
+
+    <!--  첨부파일 - insertAttachFile -->
+    <insert id="insertAttachFile" parameterType="Map">
+        INSERT INTO
+        emko.demo.tb_attach_file (
+            ref_id_seq
+            , ref_id1
+            , ref_id2
+            , ref_id3
+            , file_name
+            , file_path
+            , file_origin_name
+            , create_dt
+            , table_name
+            , comments
+            , file_url
+        )
+        VALUES(
+            #{ref_id_seq}
+            , #{ref_id1}
+            , #{ref_id2}
+            , #{ref_id3}
+            , #{file_name}
+            , #{file_path}
+            , #{file_origin_name}
+            , now()
+            , #{table_name}
+            , #{comments}
+            , #{file_url}
+        )
+        
+    </insert>
+
+
+
+    <!--  첨부파일 - updateAttachFile -->
+    <update id="updateAttachFile" parameterType="Map">
+        UPDATE emko.demo.tb_attach_file
+        SET
+            ref_id_seq = #{ref_id_seq}
+            , ref_id1 = #{ref_id1}
+            , ref_id2 = #{ref_id2}
+            , ref_id3 = #{ref_id3}
+            , file_name = #{file_name}
+            , file_path = #{file_path}
+            , table_name = #{table_name}
+        WHERE attach_file_id = #{attach_file_id}
+    </update>
+
+
+    <update id="deleteAttachFileDelYN" parameterType="Map">
+        UPDATE emko.demo.tb_attach_file
+        SET
+        del_yn = #{del_yn}
+        WHERE attach_file_id = #{attach_file_id}
+    </update>
+
+
+    <delete id="deleteAttachFile" parameterType="Map">
+        DELETE FROM emko.demo.tb_attach_file
+        WHERE attach_file_id = #{attach_file_id}
+    </delete>
+
+    <!--  첨부파일 - deleteAttachFileByFileInfo -->
+    <delete id="deleteAttachFileByRecord" parameterType="Map">
+        DELETE FROM emko.demo.tb_attach_file
+        WHERE 1 = 1
+            and table_name = #{table_name}
+            <if test="ref_id_seq != null and ref_id_seq !='' and ref_id_seq"> 
+                and ref_id_seq = #{ref_id_seq}
+            </if>
+            <if test="ref_id1 != null and ref_id1 !='' and ref_id1"> 
+                and ref_id1 = #{ref_id1}
+            </if>
+            <if test="ref_id2 != null and ref_id2 !='' and ref_id2"> 
+                and ref_id2 = #{ref_id2}
+            </if>
+            <if test="ref_id3 != null and ref_id3 !='' and ref_id3"> 
+                and ref_id3 = #{ref_id3}
+            </if>
+
+    </delete>
+
+</mapper>
+

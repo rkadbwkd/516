@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anylogic.demo.crud.user.mapper.UserMapper">
+
+    <!--   - selectUser -->
+    <select id="selectUser" parameterType="Map" resultType="Map">
+        <!--  페이징 SQL Header -->
+        <include refid="com.anylogic.demo.common.mapper.CommonMapper.pagingHeaderSql" />
+
+        SELECT
+            user_no as "user_no" 
+            , user_name as "user_name" 
+            , to_char(user_reg_date,'YYYY-MM-DD hh24:mi:ss') as "user_reg_date"
+            , user_use_yn as "user_use_yn" 
+            , user_age as "user_age" 
+            , sex as "sex" 
+            , ROW_NUMBER() OVER ( order by  ${sortItem} ${sortDirection} ) as "RNUM" 
+        FROM  emko.demo.tb_user
+        WHERE 1 = 1
+            <if test="user_name != null and user_name !=''"> 
+                and user_name like CONCAT('%', #{user_name}, '%') 
+            </if>
+            <if test="sex != null and sex !=''"> 
+                and sex like CONCAT('%', #{sex}, '%') 
+            </if>
+            <if test="sortItem != null and sortItem !='' and sortDirection != null and sortDirection !=''"> 
+                order by ${sortItem} ${sortDirection} OFFSET 0 ROWS
+            </if>
+
+        <!--  페이징 SQL Footer -->
+        <include refid="com.anylogic.demo.common.mapper.CommonMapper.pagingFooterSql" />
+    </select>
+
+    <!--   - getUser -->
+    <select id="getUser" parameterType="Map" resultType="Map">
+
+        SELECT
+            user_no as "user_no" 
+            , user_name as "user_name" 
+            , to_char(user_reg_date,'YYYY-MM-DD hh24:mi:ss') as "user_reg_date"
+            , user_use_yn as "user_use_yn" 
+            , user_age as "user_age" 
+            , sex as "sex" 
+        FROM  emko.demo.tb_user
+        WHERE 1 = 1
+            <if test="user_no != null and user_no !=''"> 
+                and user_no = #{user_no}::int8
+            </if>
+
+    </select>
+
+
+    <!--   - deleteUser -->
+    <delete id="deleteUser" parameterType="Map">
+        DELETE FROM emko.demo.tb_user
+        WHERE 1 = 1
+            and user_no = #{user_no}::int8
+    </delete>
+
+    <!--   - insertUser -->
+    <insert id="insertUser" parameterType="Map" useGeneratedKeys="true" keyProperty="user_no"> 
+        INSERT INTO
+        emko.demo.tb_user(
+            <trim suffixOverrides=",">
+            <if test="user_name != null and user_name !=''">
+              user_name,
+            </if>
+            <if test="user_reg_date != null and user_reg_date !=''">
+              user_reg_date,
+            </if>
+            <if test="user_use_yn != null and user_use_yn !=''">
+              user_use_yn,
+            </if>
+            <if test="user_age != null and user_age !=''">
+              user_age,
+            </if>
+            <if test="sex != null and sex !=''">
+              sex,
+            </if>
+            </trim>
+        )
+        VALUES(
+            <trim suffixOverrides=",">
+            <if test="user_name != null and user_name !=''">
+              #{user_name},
+            </if>
+            <if test="user_reg_date != null and user_reg_date !=''">
+              #{user_reg_date}::timestamp,
+            </if>
+            <if test="user_use_yn != null and user_use_yn !=''">
+              #{user_use_yn},
+            </if>
+            <if test="user_age != null and user_age !=''">
+              #{user_age}::int,
+            </if>
+            <if test="sex != null and sex !=''">
+              #{sex},
+            </if>
+            </trim>
+        )
+    </insert>
+
+
+    <!--   - updateUser -->
+    <update id="updateUser" parameterType="Map">
+        UPDATE emko.demo.tb_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="user_name != null and user_name !=''">
+                user_name = #{user_name},
+            </if>
+            <if test="user_reg_date != null and user_reg_date !=''">
+                user_reg_date = #{user_reg_date}::timestamp,
+            </if>
+            <if test="user_use_yn != null and user_use_yn !=''">
+                user_use_yn = #{user_use_yn},
+            </if>
+            <if test="user_age != null and user_age !=''">
+                user_age = #{user_age}::int,
+            </if>
+            <if test="sex != null and sex !=''">
+                sex = #{sex},
+            </if>
+        </trim>
+        WHERE 1 = 1
+            and user_no = #{user_no}::int8
+    </update>
+
+</mapper>

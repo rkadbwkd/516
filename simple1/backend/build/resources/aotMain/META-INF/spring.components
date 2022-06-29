@@ -1,0 +1,20 @@
+#
+#Mon May 16 13:32:58 KST 2022
+com.anylogic.demo.common.util.AES256Utill=org.springframework.stereotype.Component
+com.anylogic.demo.common.file.controller.AttachFileEmkoDemoController=org.springframework.stereotype.Component
+com.anylogic.demo.common.file.MapUtil=org.springframework.stereotype.Component
+com.anylogic.demo.config.PropertiesConfiguration=org.springframework.stereotype.Component
+com.anylogic.demo.common.util.HttpApiClient=org.springframework.stereotype.Component
+com.anylogic.demo.config.PortalWebMvcConfigurerAdapter=org.springframework.stereotype.Component
+com.anylogic.demo.common.mail.MailSender=org.springframework.stereotype.Component
+com.anylogic.demo.common.file.service.AttachFileEmkoDemoService=org.springframework.stereotype.Component
+com.anylogic.demo.crud.user.service.UserServiceImpl=org.springframework.stereotype.Component
+com.anylogic.demo.common.file.LoginSessionListener=org.springframework.stereotype.Component
+com.anylogic.demo.config.AnyXProperties=org.springframework.boot.context.properties.ConfigurationProperties
+com.anylogic.demo.config.datasource.PostgresqlDatabaseConfig=org.springframework.stereotype.Component
+com.anylogic.demo.crud.user.controller.UserController=org.springframework.stereotype.Component
+com.anylogic.demo.common.excel.service.ExcelSVC=org.springframework.stereotype.Component
+com.anylogic.demo.config.FullBeanNameGenerator=org.springframework.stereotype.Component
+com.anylogic.demo.config.SwaggerConfig=org.springframework.stereotype.Component
+com.anylogic.demo.crud.user.mapper.UserMapper=org.springframework.stereotype.Component
+com.anylogic.demo.MainApplication=org.springframework.stereotype.Component,org.springframework.boot.SpringBootConfiguration

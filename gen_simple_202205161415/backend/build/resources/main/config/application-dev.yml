@@ -1,0 +1,60 @@
+spring:
+  datasource:
+  #  type: com.zaxxer.hikari.HikariDataSource
+  #driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+  #username: ${postgres-api-display-username}
+  #password: ${postgres-api-display-password}
+  #url: jdbc:log4jdbc:postgresql://${postgres-server}:5432/${database-name}?currentSchema=${scheme-name}
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:postgresql://anylogic.iptime.org:5432/emko?currentSchema=emko
+    jdbc-url: jdbc:log4jdbc:postgresql://anylogic.iptime.org:5432/emko?currentSchema=emko
+    username: anylogic
+    password: doslfhwlr1
+    hikari:
+      connection-timeout: 10000
+      minimum-idle: 1
+      maximum-pool-size: 3
+      max-lifetime: 3597000
+      pool-name: ${spring.application}-${spring.profiles.default}-pool
+      data-source-properties:
+        cache-prep-stmts: "true"
+        prep-stmt-cache-size: "250"
+        prep-stmt-cache-sql-limit: "2048"
+        use-server-prep-stmts: "true"
+        use-local-session-state: "true"
+        rewrite-batched-statements: "true"
+        cache-result-set-metadata: "true"
+        cache-server-configuration: "true"
+        elide-set-auto-commits: "true"
+        maintain-time-stats: "false"
+
+server:
+  port: 8580
+
+logging:
+  pattern:
+    console: ${CONSOLE_LOG_PATTERN:%clr(%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m (%file:%line\) %n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}}
+    file:  ${CONSOLE_LOG_PATTERN:%clr(%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m (%file:%line\) %n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}}
+  level:
+    ROOT: INFO
+    tricycle: DEBUG
+    org.springframework.boot: INFO
+    #    org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener.debug: DEBUG
+    #    org.springframework.boot.devtools: DEBUG
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql: TRACE
+    #    org.springframework.cloud.netflix.eureka: TRACE
+    #    com.netflix.eureka: TRACE
+    jdbc.resultset: ERROR
+    jdbc.autdit: ERROR
+    jdbc.resultsettable: ERROR
+    com.zaxxer.hikari.pool.HikariPool: debug
+file:
+  path: ./log
+  excelFileUploadPath: ./upload
+
+security:
+  AES256PASS: n2r5u8x!A%D*G-KaPdSgVkYp3s6v9y$B?E(H+MbQeThWmZq4t7w!z%C*F)J@NcRf
+

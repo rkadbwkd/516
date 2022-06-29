@@ -1,0 +1,62 @@
+{
+  "name": "user",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vue-cli-service serve --port 8080 --open --host localhost",
+    "serve": "vue-cli-service serve --port 8080",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "clean": "rm -rf notemodules target"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.0.0",
+    "axios": "^0.21.4",
+    "console": "^0.7.2",
+    "file-saver": "^2.0.5",
+    "http-proxy-middleware": "^2.0.4",
+    "node-sass": "^6.0.1",
+    "sass-loader": "^10.2.0",
+    "scss": "^0.2.4",
+    "quasar": "^2.6.0",
+    "vue": "^3.0.0",
+    "core-js": "^3.20.3",
+    "vue-excel-xlsx": "^1.2.2",
+    "emailjs-com": "^3.2.0",
+    "vue-iamport": "^0.1.2",
+    "vue-router": "^4.0.13",
+    "vue-sidebar-menu": "^4.8.1",
+    "vuex": "^4.0.2",
+    "vuex-persistedstate": "^4.1.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@quasar/app-webpack": "^3.0.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^6.2.2",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
+
